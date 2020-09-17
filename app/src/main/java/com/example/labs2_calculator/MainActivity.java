@@ -1,5 +1,6 @@
 package com.example.labs2_calculator;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +13,9 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +38,47 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         operation = (TextView) findViewById(R.id.tvOperation);
         resultat = (TextView) findViewById(R.id.tvResultat);
+
+        Button buttonEqual = new Button(this);
+        buttonEqual.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, (float) 0.25));
+        buttonEqual.setText("=");
+        buttonEqual.setId(R.id.btnEqual);
+        buttonEqual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myClickHandler(v);
+            }
+        });
+
+        LinearLayout l = findViewById(R.id.equalLayout);
+        l.addView(buttonEqual);
+
+
+        /*
+        <Button
+                android:id="@+id/btnEqual"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:onClick="myClickHandler"
+                android:text="=" />
+
+                buttonEqual.setId(123456789);
+        buttonEqual.setText("=");
+        buttonEqual.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        buttonEqual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myClickHandler(v);
+            }
+
+        });
+*/
+
+
+
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
     public void myClickHandler(View view) {
         switch (view.getId()) {
             case R.id.btnZero:
@@ -267,7 +314,6 @@ public class MainActivity extends AppCompatActivity {
                     operatorReady = false;
                     lastnumericReady = false;
                 }
-                break;
         }
     }
 }
